@@ -1,0 +1,47 @@
+/* .navbar {
+
+}
+.navbar-expand {
+
+} */
+/* 
+    e8d1c5
+    eddcd2
+    fff1e6
+    f0efeb
+    eeddd3
+    edede8  
+
+    432818
+    99582a
+*/
+body{
+    background-color:#f6f5f2;
+
+}
+
+nav {
+    background-color: #432818;
+}
+
+.navbar-collapse, a {
+    color: #fff1e6;
+}
+
+.form-control {
+    border-color: #fff1e6;
+}
+
+.btn-outline-success {
+    color: #fff1e6;
+    border-color: #fff1e6;
+}
+table {
+    margin:1rem;
+    margin-left: 4%;
+    margin-right: 4%;
+    background-color: #eddcd2;
+    border-radius:5px;
+    /* border: solid 1px gray; */
+
+} 
