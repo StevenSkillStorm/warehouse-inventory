@@ -13,8 +13,6 @@ const mongoose = require('mongoose');
 // const getAllInventories = async({}) => {};
 
 
-
-
 const addInventory = async ({}) => {
     try {
         console.log('In addInventory()');
