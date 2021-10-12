@@ -3,7 +3,7 @@ const { resolve } = require('path');
 const {addInventory, deleteInventory, getAllInventories } = require('../../controller/inventory.js');
 
 // GET all companies
-router.get('/', async (req, res) => {
+router.get('/inventories', async (req, res) => {
     try{
         const companies = await getAllCompanies();
         res.status(200).json(companies);
@@ -13,15 +13,6 @@ router.get('/', async (req, res) => {
 
 });
 
-
-
-
-
-
-app.METHOD(PATH, HANDLER);
-router.METHOD(PATH, HANDLER);
-
-
 router.get('/users/:name', (req, res) => {
     console.log(req.params.name);
 });
@@ -29,3 +20,5 @@ router.get('/users/:name', (req, res) => {
 router.get('/users/id', (req, res) => {
     console.log('Get ID');
 });
+
+module.exports = router;
