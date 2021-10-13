@@ -24,7 +24,11 @@ function getCompanies() {
             //
             for(company of companies) {
                 const div = document.createElement('div');
-                // Name, warehouseCount, Desc
+                // id, name, desc, banner, warehouses[{
+                //      warehouse_id, desc, location, item_count, max_capacity, items [{
+                //          item_name, count, price 
+                //      }]
+                // },{}]
                 div.innerText = ``;
                 const button = document.createElement('button');
                 // Consider using input instead?

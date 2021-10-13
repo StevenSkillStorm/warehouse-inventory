@@ -35,12 +35,26 @@
         </div>
     </nav>
 
-    <div class="header" id="companies">
+    <div class="header d-flex flex-row justify-content-around" id="companies">
         <h1>Put company cards here</h1>
         <p>Index</p>
+        <div class="card">
+            <!-- Sample company card -->
+            <!-- Database entries should also contain card image links -->
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Company name</h5>
+                <p class="card-text">Fill this with the company desc and any other stuff wrt databases</p>
+                <a href="#" class="btn btn-primary" onclick="">Edit company</a>
+            </div>
+        </div>
+        <div class="p-2">yes</div>
+        <div class="p-2">yes</div>
+        <div class="p-2">yes</div>
         <!-- Each company should have a name, desc, and warehouse count -->
         <!-- Each warehouse should have a name, desc, and item count -->
         <!-- Warehouse (inventory) should be embedded into the company data (?) -->
+        <!-- This should be a flexbox -->
     </div>
 
 
@@ -48,8 +62,8 @@
     <!-- Flex box with company cards -->
 
     <!-- Fill this with inventory data -->
-    <div>
-        <table class="table">
+    <div class="container-fluid">
+        <table class="table table-hover table-responsive">
             <thead>
                 <tr>
                     <th scope="col">#</th>

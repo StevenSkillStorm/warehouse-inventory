@@ -36,12 +36,40 @@ nav {
     color: #fff1e6;
     border-color: #fff1e6;
 }
+
 table {
     margin:1rem;
     margin-left: 4%;
     margin-right: 4%;
+    max-width:92%;
     background-color: #eddcd2;
     border-radius:5px;
     /* border: solid 1px gray; */
 
 } 
+
+.card {
+    background-color: #eddcd2;
+    max-width: 35%;
+    margin:1%;
+}
+
+.card img {
+    background-color: #432818;
+    color:#eddcd2;
+}
+
+.btn-primary {
+    background-color: #99582a;
+    border-color: #edede8;
+}
+.btn-primary:hover {
+    background-color:#c06f35;
+    border-color: white;
+
+}
+/* First column is a smaller width */
+th:first-child {
+    min-width: 0.5rem;
+    max-width: 0.5rem;
+}
