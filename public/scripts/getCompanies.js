@@ -16,12 +16,16 @@ function getCompanies() {
 
     //AJAX
     const xhr = new XMLHttpRequest();
+    // let url = "http://localhost:8088";
+    let url = "";
+    // When the data is loaded, populate the company cards area
     xhr.onload = function() {
+        console.warn(xhr.responseText);
+        console.log(xhr.responseType);
         const companies = JSON.parse(xhr.response);
         const companyContainer = document.getElementById('companies');
         // console.log(companies);
         if(xhr.status === 200) {    // OK
-            //
             for(company of companies) {
                 // Create a card for each company
                 const card = document.createElement('div');
@@ -49,11 +53,14 @@ function getCompanies() {
                 // Populate elements
                 cardImg.src = company.img;
                 cardTitle.innerHTML = company.name;
-                cardText.innerHTML = company.desc + `\nWarehouse(s): ${company.warehouses.size()}`;
+                cardText.innerHTML = company.desc + `<br>Warehouse(s): ${company.warehouses.length}`;
                 // TODO
                 cardEdit.onclick = "";
                 cardLoad.onclick = ""; // Load the warehouse(s) associated
                 cardDelete.onclick = "";
+                cardEdit.innerHTML = "Edit";
+                cardLoad.innerHTML = "Load";
+                cardDelete.innerHTML = "Delete";
 
                 // Build card
                 cardButtons.appendChild(cardLoad);
@@ -64,7 +71,7 @@ function getCompanies() {
                 cardBody.appendChild(cardButtons);
                 card.appendChild(cardImg);
                 card.appendChild(cardBody);
-                
+
                 // Append card
                 companyContainer.append(card);
             }
@@ -74,7 +81,13 @@ function getCompanies() {
             console.log(xhr.status, xhr.statusText);
         }
     }
-    xhr.open('GET', '/companies'); // routes/api/company.js
+
+    xhr.onerror = function() {
+        alert('Network Error');
+    }
+    
+    xhr.open('GET', url + '/companies'); // routes/api/company.js
+    // xhr.setRequestHeader('Content-type', 'application/json');
     xhr.send();
 
 }

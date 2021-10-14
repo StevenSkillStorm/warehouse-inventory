@@ -50,18 +50,24 @@ table {
 
 .card {
     background-color: #eddcd2;
-    max-width: 35%;
+    max-width: 28%;
     margin:1%;
 }
 
 .card img {
     background-color: #432818;
     color:#eddcd2;
+    padding:3%;
 }
 
+.btn-container {
+    display:flex;
+}
 .btn-primary {
     background-color: #99582a;
     border-color: #edede8;
+    margin-right:6%;
+    width: 6em;
 }
 .btn-primary:hover {
     background-color:#c06f35;

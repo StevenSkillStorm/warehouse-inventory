@@ -34,19 +34,24 @@ const deleteCompany = async({id}) => {
         mongoose.connection.close();
         return;
     } catch(err) {
-            mongoose.connection.close();
-            throw err;
+        mongoose.connection.close();
+        throw err;
     }
 }
 
 const getAllCompanies = async () => {
     try{
+        console.log("Attempting to connect to database");
         await mongoose.connect(process.env.ATLAS_URI);
-        const Companies = await Company.find();
+        console.log("Connection created");
+        const companies = await Company.find({});
         if(companies.length === 0) throw {status:500, error: 'Could not find any companies'};
+        console.log("Got companies");
+        console.log("Companies" + companies);
         mongoose.connection.close();
         return companies;
     } catch(err){
+        console.log("Controller error: " + err.message);
         mongoose.connection.close();
         throw err;
     }

@@ -1,31 +1,20 @@
 console.log('in index.js');
 const express = require('express');
 const { resolve } = require('path'); // For routing
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 8088;
 console.log(port);
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
+app.use(express.json());                            // Automatically parses JSON data
+app.use(express.urlencoded({ extended: true }));    // Allows to parse encoded Form data
+app.use(express.static('public'));                  // Sets aside static assets folder for static content (html/css/js)
 
 // Use the router files
 app.use('/companies', require('./routes/api/company.js'));
-app.use('/inventories', require('./routes/api/inventory.js'));
-
-// app.get('/', (req, res) => {
-//     try { 
-//         // Try connecting to the database
-//         res.send('Trying to connect to the database');
-        
-//     } 
-//     catch(err) {
-//         console.log(err);
-//     }
-// });
 
 app.get('/', (req, res) => {
     res.sendFile(resolve('public', 'views', 'index.html'));
