@@ -23,24 +23,55 @@ function getCompanies() {
         if(xhr.status === 200) {    // OK
             //
             for(company of companies) {
-                const div = document.createElement('div');
-                // id, name, desc, banner, warehouses[{
-                //      warehouse_id, desc, location, item_count, max_capacity, items [{
-                //          item_name, count, price 
-                //      }]
-                // },{}]
-                div.innerText = ``;
-                const button = document.createElement('button');
-                // Consider using input instead?
-                button.value = company.name;
-                button.onclick = deleteCompany; // Needs to be implemented
-                button.innerText = "DELETE COMPANY";
-                div.append(button);
-                companyContainer.append(div);
+                // Create a card for each company
+                const card = document.createElement('div');
+                const cardImg = document.createElement('img');
+                const cardBody = document.createElement('div');
+                // Title and text populate the body
+                const cardTitle = document.createElement('h5');
+                const cardText = document.createElement('p');
+                const cardButtons = document.createElement('div');
+                const cardEdit = document.createElement('a');
+                const cardLoad = document.createElement('a');
+                const cardDelete = document.createElement('a');
+
+                // Add classes
+                card.classList.add("card");
+                cardImg.classList.add("card-img-top");
+                cardBody.classList.add("card-body");
+                cardTitle.classList.add("card-title");
+                cardText.classList.add("card-text");
+                cardButtons.classList.add("btn-container");
+                cardEdit.classList.add("btn", "btn-primary");
+                cardLoad.classList.add("btn", "btn-primary");
+                cardDelete.classList.add("btn", "btn-primary");
+
+                // Populate elements
+                cardImg.src = company.img;
+                cardTitle.innerHTML = company.name;
+                cardText.innerHTML = company.desc + `\nWarehouse(s): ${company.warehouses.size()}`;
+                // TODO
+                cardEdit.onclick = "";
+                cardLoad.onclick = ""; // Load the warehouse(s) associated
+                cardDelete.onclick = "";
+
+                // Build card
+                cardButtons.appendChild(cardLoad);
+                cardButtons.appendChild(cardEdit);
+                cardButtons.appendChild(cardDelete);
+                cardBody.appendChild(cardTitle);
+                cardBody.appendChild(cardText);
+                cardBody.appendChild(cardButtons);
+                card.appendChild(cardImg);
+                card.appendChild(cardBody);
+                
+                // Append card
+                companyContainer.append(card);
             }
         } else {
             // Error handling
             companyContainer.innerText = `${companies.error}`;
+            console.log(xhr.status, xhr.statusText);
         }
     }
     xhr.open('GET', '/companies'); // routes/api/company.js

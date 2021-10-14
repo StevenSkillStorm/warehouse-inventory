@@ -2,9 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Warehouses are embedded into their parent company's document
+// Items are embedded into the warehouse document
+// A company should only contain up to 3(?) embedded warehouses
+// Past 3, any warehouses should be stored in a separate warehouses collection, each warehouse having a reference to its company 
 const companySchema = new Schema({
     name: {type: String, required: true},
     desc: String,
+    img: String,
     warehouses: [{id:{type: Number, required: true},
         location:String,
         wh_name: String,
@@ -13,7 +17,8 @@ const companySchema = new Schema({
         items:[{
             item_name:{type: String, required: true},
             count:{type: Number, required: true},
-            price:Number
+            price:Number,
+            item_size:Number
         }]
     }]
 });

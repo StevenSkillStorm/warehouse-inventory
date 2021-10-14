@@ -1,11 +1,9 @@
-const Company = require('../../models/company.js');
+const Company = require('../models/Company.js');
 const mongoose = require('mongoose');
 
 
 /**
- * Each inventory has a limit, don't know if 1000 items or a number of entries
- * Maybe this should be naturally limited by MongoDB, in that a document's max is 16MB, so each inventory is a document?
- *  
+ * Each inventory has a limit, set as a base to 
  *  
  */
 
@@ -13,39 +11,56 @@ const mongoose = require('mongoose');
 // const getAllInventories = async({}) => {};
 
 
-const addInventory = async ({}) => {
+const addCompany = async ({name, desc, img}) => {
     try {
-        console.log('In addInventory()');
+        console.log('In addCompany()');
         // Open connection
         await mongoose.connect(process.env.ATLAS_URI);
-        const inventory = new Inventory();
-        await Inventory.save();
+        const company = new Company({name, desc, img});
+        await company.save();
         // Close connection
         mongoose.connection.close();
-        // return {status: 201, message: `${} successfully created`}; 
+        return {status: 201, message: `${name} successfully created`};  // Resolved Promise 
     } catch (err){
         mongoose.connection.close();
-        throw {status: 500, error: 'Could not create inventory'}; // Rejected Promise
+        throw {status: 500, error: 'Could not create company'}; // Rejected Promise
     }
-};
+}
 
-const deleteInventory = async({}) => {
+const deleteCompany = async({id}) => {
     try{
-
+        await mongoose.connect(process.env.ATLAS_URI);
+        await Company.deleteOne({id});
+        mongoose.connection.close();
+        return;
     } catch(err) {
-
+            mongoose.connection.close();
+            throw err;
     }
+}
 
-};
+const getAllCompanies = async () => {
+    try{
+        await mongoose.connect(process.env.ATLAS_URI);
+        const Companies = await Company.find();
+        if(companies.length === 0) throw {status:500, error: 'Could not find any companies'};
+        mongoose.connection.close();
+        return companies;
+    } catch(err){
+        mongoose.connection.close();
+        throw err;
+    }
+}
 
-const updateInventory = async({id, name, value, desc}) => {
+const updateCompany = async({name, desc, img}) => {
     try{} catch(err) {
 
     }
 };
 
 module.exports = {
-    addInventory,
-    deleteInventory,
-    updateInventory
+    addCompany,
+    deleteCompany,
+    getAllCompanies,
+    // updateCompany
 }

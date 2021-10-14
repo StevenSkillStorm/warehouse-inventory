@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { resolve } = require('path');
-const {addInventory, deleteInventory, getAllInventories } = require('../../controller/inventory.js');
+const {addCompany, deleteCompany, getAllCompanies} = require('../../controller/company.js');
 
 // GET all companies
 router.get('/companies', async (req, res) => {
@@ -11,15 +11,6 @@ router.get('/companies', async (req, res) => {
         res.status(500).json(err);
     }
 
-});
-
-
-router.get('/users/:name', (req, res) => {
-    console.log(req.params.name);
-});
-
-router.get('/users/id', (req, res) => {
-    console.log('Get ID');
 });
 
 module.exports = router;
