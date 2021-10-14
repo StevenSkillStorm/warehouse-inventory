@@ -20,8 +20,6 @@ function getCompanies() {
     let url = "";
     // When the data is loaded, populate the company cards area
     xhr.onload = function() {
-        console.warn(xhr.responseText);
-        console.log(xhr.responseType);
         const companies = JSON.parse(xhr.response);
         const companyContainer = document.getElementById('companies');
         // console.log(companies);
@@ -78,7 +76,6 @@ function getCompanies() {
         } else {
             // Error handling
             companyContainer.innerText = `${companies.error}`;
-            console.log(xhr.status, xhr.statusText);
         }
     }
 

@@ -14,27 +14,85 @@
 
     432818
     99582a
+
+    a8dadc
 */
 body{
-    background-color:#f6f5f2;
-
+    /* background-color:#f6f5f2; */
+    background-color: #f1faee;
 }
 
-nav {
-    background-color: #432818;
+.btn-bar {
+    display:flex;
+    justify-content: right;
+    width:100%;
+}
+.btn-bar button {
+    /* margin-top:1%; */
+    margin-bottom:1%;
+    margin-right:5%;
+    width:8em;
+}
+.btn-container {
+    display:flex;
 }
 
-.navbar-collapse, a {
-    color: #fff1e6;
+.btn-primary {
+    background-color: #457b9d;
+    border-color: #f1faee;
+    margin-right:6%;
+    width: 6em;
 }
 
-.form-control {
-    border-color: #fff1e6;
+.btn-primary:focus {
+    background-color:#4989b1;
+    border-color: white;
+}
+
+.btn-primary:hover {
+    background-color:#4989b1;
+    border-color: white;
+
 }
 
 .btn-outline-success {
-    color: #fff1e6;
-    border-color: #fff1e6;
+    color: #f1faee;
+    border-color: #f1faee;
+}
+
+
+.card {
+    background-color: #f1faee;
+    max-width: 28%;
+    margin:1%;
+}
+
+.card img {
+    background-color: #1d3557;
+    color:#f1faee;
+    padding:3%;
+    object-fit:cover;
+    height:5em;
+    width:100%;
+}
+
+.close {
+    font-size:2em;
+    border-style:none;
+    background-color:white;
+
+}
+
+.form-control {
+    border-color: #457b9d;
+}
+
+nav {
+    background-color: #1d3557;
+}
+
+.navbar-collapse, a {
+    color: #f1faee;
 }
 
 table {
@@ -42,38 +100,18 @@ table {
     margin-left: 4%;
     margin-right: 4%;
     max-width:92%;
-    background-color: #eddcd2;
+    background-color: #f1faee;
     border-radius:5px;
     /* border: solid 1px gray; */
 
 } 
 
-.card {
-    background-color: #eddcd2;
-    max-width: 28%;
-    margin:1%;
+thead {
+    background-color: #457b9d;
+    color: #f1faee;
 }
 
-.card img {
-    background-color: #432818;
-    color:#eddcd2;
-    padding:3%;
-}
 
-.btn-container {
-    display:flex;
-}
-.btn-primary {
-    background-color: #99582a;
-    border-color: #edede8;
-    margin-right:6%;
-    width: 6em;
-}
-.btn-primary:hover {
-    background-color:#c06f35;
-    border-color: white;
-
-}
 /* First column is a smaller width */
 th:first-child {
     min-width: 0.5rem;
