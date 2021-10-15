@@ -19,7 +19,7 @@ const companySchema = new Schema({
             item_name:{type: String, required: true},
             count:{type: Number, required: true},
             price:Number,
-            item_size:Number
+            item_size:{type:Number, required:true}
         }]
     }]
 });

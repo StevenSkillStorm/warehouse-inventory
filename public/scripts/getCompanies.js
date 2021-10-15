@@ -51,6 +51,8 @@ function loadCompany(e) {
         // References to HTML elements
         const company = JSON.parse(xhr.response);
         const warehouseInfo = document.getElementById('table-header');
+        // Clear warehouseInfo before appending
+        warehouseInfo.innerHTML = "";
         // Load the first warehouse for now
         const warehouse = company.warehouses[0];
         // Create elements
@@ -66,6 +68,33 @@ function loadCompany(e) {
         textDiv.appendChild(whText);
         textDiv.appendChild(whDesc);
         warehouseInfo.appendChild(textDiv);
+
+        // Table work
+        const whTable = document.getElementById('table-body');
+        let index = 1; // Starts at 1 for the table
+        for(item of warehouse.items){
+            let row = document.createElement('tr');
+            let itemId = document.createElement('th');
+            let itemName = document.createElement('td');
+            let count = document.createElement('td');
+            let price = document.createElement('td');
+            let size = document.createElement('td'); 
+
+            itemId.innerHTML = index++;
+            itemName.innerHTML = item.item_name;
+            count.innerHTML = item.count;
+            price.innerHTML = item.price || "n/a";
+            size.innerHTML = item.item_size;
+            row.appendChild(itemId);
+            row.appendChild(itemName);
+            row.appendChild(count);
+            row.appendChild(price);
+            row.appendChild(size);
+            whTable.appendChild(row);
+            // Should be able to just for loop through this
+            // But using a for loop might not enforce ordering on unordered data
+            // Also doesn't enforce alternatives unless we specifically check the property name
+        }
     }
 
     xhr.open('GET', `/companies/${e.target.value}`);
