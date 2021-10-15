@@ -1,15 +1,45 @@
+function confirmDelete(e) {
+    let r = confirm("Do you really want to delete " + e.target.value + '?');
+    if(r){
+        deleteCompany(e);
+    }
+}
+
 function deleteCompany(e) {
+    
     const xhr = new XMLHttpRequest();
     xhr.onload = function() {
         console.log(JSON.parse(xhr.response));
         if(xhr.status === 200) {
             // Removes the HTML entry for this company
-            e.target.parentNode.parentNode.parentNode.parentNode.removeChild(e.target.parentNode);
+            console.log(e.target.value);
+            const nameStr = e.target.value.replace(' ', '-');
+            const ele = document.querySelector(`div.card.${nameStr}`);
+            ele.remove();
         }
     }
     // Calls the controller to modify the database
     xhr.open('DELETE', `/companies/${e.target.value}`);
     xhr.send();
+}
+
+function updateCompany(e) {
+    const xhr = new XMLHttpRequest();
+    
+    // When the data is loaded, log the result and update local entry
+    xhr.onload = function () {
+
+    }
+    // Create string with updated data
+    
+    // PUT with all new data
+    xhr.open('PUT', `/companies/${e.target.value}`);
+}
+
+function updateForm() {
+    // Get references to the form
+
+    // 
 }
 
 function getCompanies() {
@@ -23,8 +53,8 @@ function getCompanies() {
         const companies = JSON.parse(xhr.response);
         const companyContainer = document.getElementById('companies');
         if(xhr.status === 200) {    // OK
+            // Create a card for each company
             for(company of companies) {
-                // Create a card for each company
                 const card = document.createElement('div');
                 const cardImg = document.createElement('img');
                 const cardBody = document.createElement('div');
@@ -47,6 +77,9 @@ function getCompanies() {
                 cardLoad.classList.add("btn", "btn-primary");
                 cardDelete.classList.add("btn", "btn-primary");
 
+                const nameStr = company.name.replace(' ', '-');
+                card.classList.add(nameStr);   // Can use card + company name to query for cards
+                
                 // Populate elements
                 cardImg.src = company.img;
                 cardTitle.innerHTML = company.name;
@@ -57,9 +90,9 @@ function getCompanies() {
                 cardEdit.value = company.name;
                 cardDelete.value = company.name;
                 // TODO
-                cardEdit.onclick = "";
+                cardEdit.onclick = updateCompany;
                 cardLoad.onclick = ""; // Load the warehouse(s) associated
-                cardDelete.onclick = deleteCompany;
+                cardDelete.onclick = confirmDelete;
                 cardEdit.innerHTML = "Edit";
                 cardLoad.innerHTML = "Load";
                 cardDelete.innerHTML = "Delete";

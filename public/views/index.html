@@ -74,7 +74,7 @@
                     </div>
                     <!-- img URL -->
                     <div class="form-group">
-                        <label for="url">Logo</label>
+                        <label for="img">Logo</label>
                         <input type="url" class="form-control" name="img" id="img" placeholder="http://mysite.com/yourimage">
                     </div>
                     <input type="submit" class="btn btn-secondary" value="Submit" />
@@ -85,7 +85,42 @@
     </div>
     </div>
     
-
+    <!-- Update Company Modal Form -->
+    <div class="modal fade" id="update-modal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="updateModalLabel">Update Company</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <!-- Update Company Form -->
+                <form id="update-company" method="PUT" action="/companies">
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="update-name">Company Name</label>
+                        <input type="text" class="form-control" maxlength="50" required="true" name="update-name" id="update-name" readonly>
+                        <!-- <small class="requiredText form-text text-muted">Required</small>  -->
+                    </div>
+                    <!-- Description -->
+                    <div class="form-group">
+                        <label for="update-desc">Description</label>
+                        <input type="text" class="form-control" name="update-desc" id="update-desc">
+                    </div>
+                    <!-- img URL -->
+                    <div class="form-group">
+                        <label for="update-img">Logo</label>
+                        <input type="url" class="form-control" name="update-img" id="update-img">
+                    </div>
+                    <input type="submit" class="btn btn-secondary" value="Submit" />
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    </div>
     <!-- Fill this with inventory data -->
     <div class="container-fluid">
         <table class="table table-hover table-responsive">
