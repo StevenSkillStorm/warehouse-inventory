@@ -24,6 +24,18 @@ router.get('/:name', async (req, res) => {
     }
 })
 
+// Update company
+router.put('/', async(req, res) => {
+    try{
+        const data = await updateCompany(req.body);
+        // Maybe have to parse the data in req
+        // Refresh page with new data
+        res.sendFile(resolve('public', 'views', 'index.html'));
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
+
 // Add company
 router.post('/', async (req, res) => {
     try{

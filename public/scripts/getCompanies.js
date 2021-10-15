@@ -1,3 +1,4 @@
+
 function confirmDelete(e) {
     let r = confirm("Do you really want to delete " + e.target.value + '?');
     if(r){
@@ -36,10 +37,29 @@ function updateCompany(e) {
     xhr.open('PUT', `/companies/${e.target.value}`);
 }
 
-function updateForm() {
+// Changing BS Modal with vanilla JS
+function openModal() {
+    document.getElementById("backdrop").style.display = "block";
+    document.getElementById("update-modal").style.display = "block";
+    document.getElementById("update-modal").classList.add("show");
+}
+function closeModal() {
+    console.log("Closing modal");
+    document.getElementById("backdrop").style.display = "none";
+    document.getElementById("update-modal").style.display = "none";
+    document.getElementById("update-modal").classList.remove("show");
+}
+
+function updateForm(e) {
     // Get references to the form
+    openModal();
+    const nameIn = document.getElementById("update-name");
+    const descIn = document.getElementById("update-desc");
+    const imgIn = document.getElementById("update-img");
+    // Autopopulate name
+    nameIn.value = e.target.value;
     
-    // 
+
 }
 
 function loadCompany(e) {
