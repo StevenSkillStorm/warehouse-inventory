@@ -38,9 +38,11 @@ function updateCompany(e) {
 
 function updateForm() {
     // Get references to the form
-
+    
     // 
 }
+
+function loadCompany() {}
 
 function getCompanies() {
 
@@ -90,8 +92,8 @@ function getCompanies() {
                 cardEdit.value = company.name;
                 cardDelete.value = company.name;
                 // TODO
-                cardEdit.onclick = updateCompany;
-                cardLoad.onclick = ""; // Load the warehouse(s) associated
+                cardEdit.onclick = updateForm;
+                cardLoad.onclick = loadCompany; // Load the warehouse(s) associated
                 cardDelete.onclick = confirmDelete;
                 cardEdit.innerHTML = "Edit";
                 cardLoad.innerHTML = "Load";
