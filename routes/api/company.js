@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { resolve } = require('path');
-const {addCompany, deleteCompany, getAllCompanies} = require('../../controller/company.js');
+const {addCompany, deleteCompany, getOneCompany, getAllCompanies} = require('../../controller/company.js');
 
 // GET all companies
 router.get('/', async (req, res) => {
@@ -14,6 +14,15 @@ router.get('/', async (req, res) => {
 });
 
 // GET specific company
+router.get('/:name', async (req, res) => {
+    try {
+        console.log("In router");
+        const warehouses = await(getOneCompany(req.params.name));
+        res.status(200).json(warehouses);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
 
 // Add company
 router.post('/', async (req, res) => {

@@ -42,7 +42,32 @@ function updateForm() {
     // 
 }
 
-function loadCompany() {}
+function loadCompany(e) {
+    // e.target.value
+    const xhr = new XMLHttpRequest();
+
+    // Display warehouse information
+    xhr.onload = function() {
+        // References to HTML elements
+        const company = JSON.parse(xhr.response);
+        const warehouseInfo = document.getElementById('table-header');
+        const 
+        // Load the first warehouse for now
+        const warehouse = company.warehouses[0];
+        // Create elements
+        const whName = document.createElement('h3');
+        const whText = document.createElement('p');
+
+        whName.innerHTML = warehouse.wh_name + "<br>" + (warehouse.location || "");
+        whText.innerHTML = (warehouse.location || "") + "<br>Max Capacity: " + warehouse.max_capacity + "<br>" (warehouse.wh_desc || "");
+
+        warehouseInfo.appendChild(whName);
+        warehouseInfo.appendChild(whText);
+    }
+
+    xhr.open('GET', `/companies/${e.target.value}`);
+    xhr.send();
+}
 
 function getCompanies() {
 

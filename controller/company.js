@@ -65,6 +65,19 @@ const getAllCompanies = async () => {
     }
 }
 
+const getOneCompany = async(name) => {
+    try {
+        await mongoose.connect(process.env.ATLAS_URI);
+        const warehouses = await Company.findOne({name: name}).exec();
+        if(warehouses.length === 0) throw {status:500, error: 'Could not find any warehouses'};
+        mongoose.connection.close();
+        return warehouses;
+    } catch (err) {
+        mongoose.connection.close();
+        throw err;
+    }
+}
+
 const updateCompany = async({name, desc, img}) => {
     try{} catch(err) {
 
@@ -74,6 +87,8 @@ const updateCompany = async({name, desc, img}) => {
 module.exports = {
     addCompany,
     deleteCompany,
+    getOneCompany,
     getAllCompanies,
+
     // updateCompany
 }

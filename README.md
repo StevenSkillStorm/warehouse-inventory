@@ -1,5 +1,5 @@
 # Warehouse Manager
-## Steven Giang
+### Steven Giang
 
 ### Project Overview
 
@@ -26,7 +26,7 @@ Dependencies used include the following:
 - dotenv
 More information regarding the versions of these dependencies can be found in package.json
 
-### File Descriptions
+## File Descriptions
 - index.js
 The main script for Warehouse Manager. Deploys the application using express and manages routing. 
 

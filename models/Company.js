@@ -11,6 +11,7 @@ const companySchema = new Schema({
     img: String,
     warehouses: [{id:{type: Number, required: true},
         location:String,
+        parent_company:{type: String, required: true},
         wh_name: String,
         wh_desc: String,
         max_capacity: {type: Number, required: true},

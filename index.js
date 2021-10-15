@@ -1,4 +1,3 @@
-console.log('in index.js');
 const express = require('express');
 const { resolve } = require('path'); // For routing
 const cors = require('cors');

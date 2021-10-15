@@ -105,6 +105,23 @@ table {
 
 } 
 
+#table-header {
+    padding-left: 4%;
+    padding-right: 4%;
+    display: flex;
+    flex-direction:row;
+    justify-content:flex-start;
+
+}
+#table-header h3 {
+    margin-right: 3%;
+    border-right-style:solid #1d3557 1px;
+}
+
+/* #table-header p {
+    
+} */
+
 thead {
     background-color: #457b9d;
     color: #f1faee;
