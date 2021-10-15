@@ -24,42 +24,44 @@ function deleteCompany(e) {
     xhr.send();
 }
 
-function updateCompany(e) {
-    const xhr = new XMLHttpRequest();
-    
-    // When the data is loaded, log the result and update local entry
-    xhr.onload = function () {
 
-    }
-    // Create string with updated data
-    
-    // PUT with all new data
-    xhr.open('PUT', `/companies/${e.target.value}`);
-}
-
-// Changing BS Modal with vanilla JS
-function openModal() {
-    document.getElementById("backdrop").style.display = "block";
-    document.getElementById("update-modal").style.display = "block";
-    document.getElementById("update-modal").classList.add("show");
-}
-function closeModal() {
-    console.log("Closing modal");
-    document.getElementById("backdrop").style.display = "none";
-    document.getElementById("update-modal").style.display = "none";
-    document.getElementById("update-modal").classList.remove("show");
-}
 
 function updateForm(e) {
-    // Get references to the form
+    // Display form
     openModal();
-    const nameIn = document.getElementById("update-name");
-    const descIn = document.getElementById("update-desc");
-    const imgIn = document.getElementById("update-img");
-    // Autopopulate name
-    nameIn.value = e.target.value;
+    // Autopopulate name with current value
+    // Currently no autopopulating for other items
+    const nameIn = document.getElementById("updateName");
+    // const descIn = document.getElementById("updateDesc");
+    // const imgIn = document.getElementById("updateImg");
     
+    const nameStr = e.target.value.replace(' ', '-');
+    // const card = document.querySelector(`div.card.${nameStr}`);
+    
+    nameIn.value = e.target.value;
 
+}
+
+// Update company by manually creating XHR rather than doing PUT through the form
+// Forms only allow GET and POST, so need this method
+function updateCompany() {
+    // Input references
+    const nameIn = document.getElementById("updateName");
+    const descIn = document.getElementById("updateDesc");
+    const imgIn = document.getElementById("updateImg");
+
+    // Create XHR
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        if(xhr.status === 200) {
+            // Reload page
+            getCompanies();
+            closeModal();
+        }
+    }
+    // Calls the controller to modify the database
+    xhr.open('PUT', `/companies/?name=${nameIn.value}&desc=${descIn.value}&img=${imgIn.value}`);
+    xhr.send();
 }
 
 function loadCompany(e) {
@@ -71,8 +73,12 @@ function loadCompany(e) {
         // References to HTML elements
         const company = JSON.parse(xhr.response);
         const warehouseInfo = document.getElementById('table-header');
-        // Clear warehouseInfo before appending
+        const whTable = document.getElementById('table-body');
+        
+        // Clear warehouseInfo + table before appending
         warehouseInfo.innerHTML = "";
+        whTable.innerHTML = "";
+
         // Load the first warehouse for now
         const warehouse = company.warehouses[0];
         // Create elements
@@ -90,7 +96,6 @@ function loadCompany(e) {
         warehouseInfo.appendChild(textDiv);
 
         // Table work
-        const whTable = document.getElementById('table-body');
         let index = 1; // Starts at 1 for the table
         for(item of warehouse.items){
             let row = document.createElement('tr');
@@ -131,6 +136,8 @@ function getCompanies() {
     xhr.onload = function() {
         const companies = JSON.parse(xhr.response);
         const companyContainer = document.getElementById('companies');
+        // Clear companyContainer before population
+        companyContainer.innerHTML = "";
         if(xhr.status === 200) {    // OK
             // Create a card for each company
             for(company of companies) {
@@ -202,6 +209,19 @@ function getCompanies() {
     xhr.open('GET', url + '/companies'); // routes/api/company.js
     xhr.send();
 
+}
+
+// Changing BS Modal with vanilla JS
+function openModal() {
+    document.getElementById("backdrop").style.display = "block";
+    document.getElementById("update-modal").style.display = "block";
+    document.getElementById("update-modal").classList.add("show");
+}
+function closeModal() {
+    console.log("Closing modal");
+    document.getElementById("backdrop").style.display = "none";
+    document.getElementById("update-modal").style.display = "none";
+    document.getElementById("update-modal").classList.remove("show");
 }
 
 window.addEventListener('DOMContentLoaded', () => {

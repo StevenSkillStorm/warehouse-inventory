@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { resolve } = require('path');
-const {addCompany, deleteCompany, getOneCompany, getAllCompanies} = require('../../controller/company.js');
+const {addCompany, deleteCompany, updateCompany, getOneCompany, getAllCompanies} = require('../../controller/company.js');
 
 // GET all companies
 router.get('/', async (req, res) => {
@@ -16,7 +16,6 @@ router.get('/', async (req, res) => {
 // GET specific company
 router.get('/:name', async (req, res) => {
     try {
-        console.log("In router");
         const warehouses = await(getOneCompany(req.params.name));
         res.status(200).json(warehouses);
     } catch (err) {
@@ -27,10 +26,11 @@ router.get('/:name', async (req, res) => {
 // Update company
 router.put('/', async(req, res) => {
     try{
-        const data = await updateCompany(req.body);
-        // Maybe have to parse the data in req
+        console.log("Update route");
+        console.log(req.query);
+        const data = await updateCompany(req.query);
         // Refresh page with new data
-        res.sendFile(resolve('public', 'views', 'index.html'));
+        res.status(200).json(data);
     } catch (err) {
         res.status(500).json(err);
     }

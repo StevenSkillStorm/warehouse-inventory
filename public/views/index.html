@@ -117,24 +117,24 @@
             </div>
             <div class="modal-body">
                 <!-- Update Company Form -->
-                <form id="update-company" method="PUT" action="/companies">
+                <form id="update-company">
                     <!-- Name -->
                     <div class="form-group">
-                        <label for="update-name">Company Name</label>
-                        <input type="text" class="form-control" maxlength="50" required="true" name="update-name" id="update-name" readonly>
+                        <label for="updateName">Company Name</label>
+                        <input type="text" class="form-control" maxlength="50" required="true" name="updateName" id="updateName" readonly>
                         <!-- <small class="requiredText form-text text-muted">Required</small>  -->
                     </div>
                     <!-- Description -->
                     <div class="form-group">
-                        <label for="update-desc">Description</label>
-                        <input type="text" class="form-control" name="update-desc" id="update-desc">
+                        <label for="updateDesc">Description</label>
+                        <input type="text" class="form-control" name="updateDesc" id="updateDesc">
                     </div>
                     <!-- img URL -->
                     <div class="form-group">
-                        <label for="update-img">Logo</label>
-                        <input type="url" class="form-control" name="update-img" id="update-img">
+                        <label for="updateImg">Logo</label>
+                        <input type="url" class="form-control" name="updateImg" id="updateImg">
                     </div>
-                    <input type="submit" class="btn btn-secondary" value="Submit" />
+                    <input type="button" class="btn btn-secondary" value="Submit" onclick="updateCompany()" />
                 </form>
             </div>
             

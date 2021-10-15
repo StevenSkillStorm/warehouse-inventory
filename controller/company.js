@@ -53,7 +53,6 @@ const deleteCompany = async(name) => {
 const getAllCompanies = async () => {
     try{
         await mongoose.connect(process.env.ATLAS_URI);
-        console.log("Connected to database");
         const companies = await Company.find({});
         if(companies.length === 0) throw {status:500, error: 'Could not find any companies'};
         mongoose.connection.close();
@@ -79,8 +78,17 @@ const getOneCompany = async(name) => {
 }
 
 const updateCompany = async({name, desc, img}) => {
-    try{} catch(err) {
-
+    console.log("In updateCompany");
+    try{
+        // Make sure the program behaves properly with empty entries
+        await mongoose.connect(process.env.ATLAS_URI);
+        const company = await Company.updateOne({name:name}, {$set: {desc:desc, img:img}});
+        if(company == false) throw {status:500, error: 'Could not update company'}
+        mongoose.connection.close();
+        return company;
+    } catch(err) {
+        mongoose.connection.close();
+        throw err;
     }
 };
 
