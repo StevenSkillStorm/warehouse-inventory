@@ -4,7 +4,7 @@ function deleteCompany(e) {
         console.log(JSON.parse(xhr.response));
         if(xhr.status === 200) {
             // Removes the HTML entry for this company
-            e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+            e.target.parentNode.parentNode.parentNode.parentNode.removeChild(e.target.parentNode);
         }
     }
     // Calls the controller to modify the database
@@ -22,7 +22,6 @@ function getCompanies() {
     xhr.onload = function() {
         const companies = JSON.parse(xhr.response);
         const companyContainer = document.getElementById('companies');
-        // console.log(companies);
         if(xhr.status === 200) {    // OK
             for(company of companies) {
                 // Create a card for each company
@@ -52,10 +51,15 @@ function getCompanies() {
                 cardImg.src = company.img;
                 cardTitle.innerHTML = company.name;
                 cardText.innerHTML = company.desc + `<br>Warehouse(s): ${company.warehouses.length}`;
+                
+                // Buttons get value of company name to reference
+                cardLoad.value = company.name;
+                cardEdit.value = company.name;
+                cardDelete.value = company.name;
                 // TODO
                 cardEdit.onclick = "";
                 cardLoad.onclick = ""; // Load the warehouse(s) associated
-                cardDelete.onclick = "";
+                cardDelete.onclick = deleteCompany;
                 cardEdit.innerHTML = "Edit";
                 cardLoad.innerHTML = "Load";
                 cardDelete.innerHTML = "Delete";
@@ -84,7 +88,6 @@ function getCompanies() {
     }
     
     xhr.open('GET', url + '/companies'); // routes/api/company.js
-    // xhr.setRequestHeader('Content-type', 'application/json');
     xhr.send();
 
 }

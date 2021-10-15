@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 // A company should only contain up to 3(?) embedded warehouses
 // Past 3, any warehouses should be stored in a separate warehouses collection, each warehouse having a reference to its company 
 const companySchema = new Schema({
-    name: {type: String, required: true},
+    name: {type: String, required: true, unique: true},
     desc: String,
     img: String,
     warehouses: [{id:{type: Number, required: true},

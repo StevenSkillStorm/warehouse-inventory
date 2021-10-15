@@ -1,22 +1,4 @@
-/* .navbar {
 
-}
-.navbar-expand {
-
-} */
-/* 
-    e8d1c5
-    eddcd2
-    fff1e6
-    f0efeb
-    eeddd3
-    edede8  
-
-    432818
-    99582a
-
-    a8dadc
-*/
 body{
     /* background-color:#f6f5f2; */
     background-color: #f1faee;
@@ -62,9 +44,10 @@ body{
 
 
 .card {
-    background-color: #f1faee;
-    max-width: 28%;
-    margin:1%;
+    background-color: #d6ebea;
+    max-width: 25%;
+    min-width: 15em;
+    margin:3%;
 }
 
 .card img {
@@ -85,6 +68,19 @@ body{
 
 .form-control {
     border-color: #457b9d;
+    margin-bottom:5px;
+}
+
+.form-group {
+    margin-bottom:1em;
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:row;
+    justify-content:flex-start;
+
 }
 
 nav {
@@ -100,7 +96,7 @@ table {
     margin-left: 4%;
     margin-right: 4%;
     max-width:92%;
-    background-color: #f1faee;
+    background-color: #d6ebea;
     border-radius:5px;
     /* border: solid 1px gray; */
 

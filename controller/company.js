@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 
 /**
- * Each inventory has a limit, set as a base to 
+ * Each inventory has a limit, set as a base to 10,000
  *  
  */
 
@@ -13,24 +13,35 @@ const mongoose = require('mongoose');
 
 const addCompany = async ({name, desc, img}) => {
     try {
-        console.log('In addCompany()');
         // Open connection
         await mongoose.connect(process.env.ATLAS_URI);
-        const company = new Company({name, desc, img});
-        await company.save();
-        // Close connection
-        mongoose.connection.close();
-        return {status: 201, message: `${name} successfully created`};  // Resolved Promise 
+        
+        // TODO Fix behavior after error, so that it only displays an error
+        // Deny duplicate companies
+        const isInDB = await Company.findOne({name});
+        if(isInDB){
+            alert("Company already exists, did not create.");
+            mongoose.connection.close();
+            return {status: 409, message: "Duplicate company, did not create"};
+        } else {
+            const company = new Company({name, desc, img});
+            await company.save();
+            // Close connection
+            mongoose.connection.close();
+            return {status: 201, message: `${name} successfully created`};  // Resolved Promise 
+        }
+        
     } catch (err){
         mongoose.connection.close();
         throw {status: 500, error: 'Could not create company'}; // Rejected Promise
     }
 }
 
-const deleteCompany = async({id}) => {
+const deleteCompany = async(name) => {
     try{
+        console.log("Attempting to delete " + name);
         await mongoose.connect(process.env.ATLAS_URI);
-        await Company.deleteOne({id});
+        await Company.deleteOne({name});
         mongoose.connection.close();
         return;
     } catch(err) {
@@ -41,13 +52,10 @@ const deleteCompany = async({id}) => {
 
 const getAllCompanies = async () => {
     try{
-        console.log("Attempting to connect to database");
         await mongoose.connect(process.env.ATLAS_URI);
-        console.log("Connection created");
+        console.log("Connected to database");
         const companies = await Company.find({});
         if(companies.length === 0) throw {status:500, error: 'Could not find any companies'};
-        console.log("Got companies");
-        console.log("Companies" + companies);
         mongoose.connection.close();
         return companies;
     } catch(err){

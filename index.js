@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 8088;
 console.log(port);
 
-app.use(cors());
+app.use(cors());                                    // Allows cross origin resource sharing
 app.use(express.json());                            // Automatically parses JSON data
 app.use(express.urlencoded({ extended: true }));    // Allows to parse encoded Form data
 app.use(express.static('public'));                  // Sets aside static assets folder for static content (html/css/js)
